@@ -1,0 +1,47 @@
+# Kopieren nach agent.ini und anpassen:  cp agent.ini.example agent.ini && chmod 600 agent.ini
+
+[server]
+# Volle URL zu pi.php auf deinem Webspace
+url = https://example.com/pi-terminal/pi.php
+# Gleicher Wert wie 'pi_token' in config.php
+token = BITTE-ERSETZEN
+# TLS-Zertifikat prüfen (nur zum lokalen Testen ohne HTTPS abschalten)
+verify_tls = true
+
+[shell]
+# ssh = Login mit Linux-Benutzer/Passwort im Browser-Terminal (empfohlen)
+# pty = Shell sofort, läuft als Benutzer dieses Agenten
+mode = ssh
+ssh_host = 127.0.0.1
+ssh_port = 22
+max_login_attempts = 3
+# Host-Keys des eigenen sshd, gegen die die Verbindung geprüft wird
+host_key_files = /etc/ssh/ssh_host_*_key.pub
+# nur für mode = pty
+shell = /bin/bash
+
+[e2e]
+# Terminal-Schlüssel für die Ende-zu-Ende-Verschlüsselung des Web-Terminals.
+# Wird im Browser eingegeben und dem Webserver NIE mitgeteilt. Ohne ihn ist das
+# Web-Terminal abgeschaltet. Zufällig erzeugen (mind. 16 Zeichen):
+#   python3 -c "import secrets; print(secrets.token_urlsafe(18))"
+secret = BITTE-ERSETZEN
+
+[tunnel]
+# SSH-Tunnel vom Mac/PC (client/pi_tunnel.py) erlauben
+enabled = true
+# Einziges erlaubtes Ziel – der Tunnel kann nirgendwo anders hin
+target = 127.0.0.1:22
+# Absender-Adresse für Tunnel-Verbindungen. Mit 127.0.0.2 kann sshd Tunnel
+# (127.0.0.2) und Web-Terminal (127.0.0.1) unterscheiden, z.B. um im Tunnel
+# nur SSH-Keys zu erlauben (siehe README). Leer = Standard.
+source_address = 127.0.0.2
+
+[timing]
+# Nur Startwerte – sobald der Server erreichbar ist, gelten die Werte aus config.php.
+pi_poll_pause_ms = 100
+pi_push_interval_ms = 50
+longpoll_timeout_s = 20
+
+[log]
+level = INFO

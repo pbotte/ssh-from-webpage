@@ -1,0 +1,22 @@
+[Unit]
+Description=Pi-Agent fuer Web-Terminal
+After=network-online.target ssh.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=piagent
+Group=piagent
+WorkingDirectory=/opt/pi-agent
+ExecStart=/usr/bin/python3 -u /opt/pi-agent/pi_agent.py /opt/pi-agent/agent.ini
+Restart=always
+RestartSec=5
+
+# Härtung (für mode = ssh; bei mode = pty ggf. lockern, da die Shell sonst eingeschränkt ist)
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

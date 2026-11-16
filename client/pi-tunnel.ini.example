@@ -1,0 +1,10 @@
+# Vorlage für ~/.config/pi-tunnel.ini
+#   mkdir -p ~/.config && cp pi-tunnel.ini.example ~/.config/pi-tunnel.ini
+#   chmod 600 ~/.config/pi-tunnel.ini
+
+[server]
+# Volle URL zu client.php auf deinem Webspace
+url = https://example.com/pi-terminal/client.php
+# Token aus 'client_tokens' in config.local.php (eigener Token je Gerät)
+token = BITTE-ERSETZEN
+verify_tls = true

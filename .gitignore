@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+*.pyc
+
+# Geheimnisse (Passwort-Hash, Token)
+server/config.local.php
+pi/agent.ini
+
+# Laufzeitdaten des Webservers (Sitzungen, Logs, Sperren)
+server/data/*
+!server/data/.htaccess
+client/pi-tunnel.ini
+
+# Upload-Pakete
+*.zip

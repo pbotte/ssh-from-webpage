@@ -1,0 +1,30 @@
+<?php
+// ============================================================================
+//  Lokale Konfiguration mit Geheimnissen – wird von Git ignoriert.
+//      cp config.local.php.example config.local.php
+//  Alle Schlüssel aus config.php können hier überschrieben werden.
+// ============================================================================
+return [
+
+    // Web-Login: Benutzername => Passwort-Hash (oder Klartext, nicht empfohlen)
+    // Hash erzeugen (z.B. am Mac oder auf dem Pi):
+    //   php -r 'echo password_hash("MeinPasswort", PASSWORD_DEFAULT), "\n";'
+    // Hash in EINFACHE Anführungszeichen setzen (wegen der $-Zeichen).
+    'users' => [
+        'admin' => '$2y$12$...hier-den-hash-eintragen...',
+    ],
+
+    // Langer Zufallswert, identisch in pi/agent.ini eintragen.
+    //   python3 -c "import secrets; print(secrets.token_urlsafe(48))"
+    'pi_token' => 'BITTE-ERSETZEN',
+
+    // SSH-Tunnel vom Mac/PC (client/pi_tunnel.py): Name => eigener Token je Gerät.
+    // Weglassen oder leer lassen = Tunnel deaktiviert.
+    //   python3 -c "import secrets; print(secrets.token_urlsafe(48))"
+    'client_tokens' => [
+        // 'macbook' => 'BITTE-ERSETZEN',
+    ],
+
+    // Beispiel: einzelne Zeitabstände überschreiben
+    // 'timing' => ['longpoll_timeout_s' => 10],
+];
